@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -9,12 +9,17 @@
 }
 
 .main {
-  padding: 5rem 0;
-  flex: 1;
+  align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  max-width: 400px;
+  padding: 2rem 0;
+}
+
+.intro {
+  text-align: center;
 }
 
 .footer {
@@ -109,8 +114,8 @@
 }
 
 .logo {
-  height: 1em;
-  margin-left: 0.5rem;
+  margin-bottom: 1em;
+  max-width: 33%;
 }
 
 @media (max-width: 600px) {
