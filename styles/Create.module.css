@@ -1,0 +1,8 @@
+.section {
+  transition: opacity 200ms;
+  transition-delay: 500ms;
+}
+
+.sectionHidden {
+  opacity: 0;
+}
