@@ -8,18 +8,26 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>qg2.work</title>
-        <meta name="description" content="Help your colleagues work more effectively with you. It's free and only takes a few minutes." />
+        <meta
+          name="description"
+          content="Help your colleagues work more effectively with you. It's free and only takes a few minutes."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <div className={styles.logo}>
-          <Image src="/logo.png" width={500} height={192} layout="intrinsic"></Image>
+          <Image
+            src="/logo.png"
+            width={500}
+            height={192}
+            layout="intrinsic"
+          ></Image>
         </div>
 
         <p>
-          <strong>qg2</strong> generates a one-page guide to help your colleagues work more effectively with you.
-          It includes:
+          <strong>qg2</strong> generates a one-page guide to help new colleagues
+          work more effectively with you. It includes:
         </p>
 
         <ul>
@@ -33,17 +41,27 @@ export default function Home() {
         </ul>
 
         <p>
-          <strong>Every section is optional.</strong> If you prefer not to share something, you can leave it blank.
+          <strong>Every section is optional.</strong> If you prefer not to share
+          something, you can leave it blank. Please don't share anything that
+          might result in negative consequences at work.
         </p>
 
         <p>
-          It's free to use and there's no signup. At the end of the process, you'll make a PDF or printout.
+          It's free to use and there's no signup. At the end of the process,
+          you'll make a PDF or printout.
+        </p>
+
+        <p className={styles.small}>
+          By clicking 'Get Started' I understand and agree that qg2 and its
+          creator(s) are not responsible for the data I choose to enter and
+          share using this tool. The data I enter will be stored primarily on my
+          own computer. Anything submitted to another machine or server will be
+          stored at a statistical level and will not be associated with my name,
+          identity, or computer.
         </p>
 
         <Link href="/create">
-          <button>
-            Get started
-          </button>
+          <button>Get Started</button>
         </Link>
       </main>
     </div>
