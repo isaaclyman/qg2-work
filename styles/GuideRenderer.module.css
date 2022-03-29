@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  margin-top: 16px;
+  min-height: 250px;
+  padding: 0 32px;
+  width: 100%;
+}
+
+.viewer {
+  min-height: 100%;
+  width: 100%;
+}

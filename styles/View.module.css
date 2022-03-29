@@ -1,0 +1,17 @@
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-width: 400px;
+  padding: 2rem 0;
+}
+
+.warningBox {
+  background-color: #fcf8e3;
+  border: 2px solid #eedbb8;
+  border-radius: 4px;
+  padding: 8px 35px 8px 14px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  margin-bottom: 18px;
+}

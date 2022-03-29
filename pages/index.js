@@ -2,8 +2,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
+import { useReadOnlyStickyState } from '../helpers/useStickyState.hook'
 
 export default function Home() {
+  const createForm = useReadOnlyStickyState('createForm')
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +16,13 @@ export default function Home() {
           content="Help your colleagues work more effectively with you. It's free and only takes a few minutes."
         />
         <link rel="icon" href="/favicon.ico" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
 
       <main className={styles.main}>
@@ -24,6 +34,18 @@ export default function Home() {
             layout="intrinsic"
           ></Image>
         </div>
+
+        {createForm && (
+          <div className={styles.mainSub}>
+            <p>
+              It looks like you've been here before. Would you like to see the
+              guide you've previously created?
+            </p>
+            <Link href="/view">
+              <button>View your guide</button>
+            </Link>
+          </div>
+        )}
 
         <p>
           <strong>qg2</strong> generates a one-page guide to help new colleagues
@@ -47,8 +69,8 @@ export default function Home() {
         </p>
 
         <p>
-          It's free to use and there's no signup. At the end of the process,
-          you'll make a PDF or printout.
+          This tool is free to use and there's no signup. At the end of the
+          process, you'll print or download a PDF.
         </p>
 
         <p className={styles.small}>

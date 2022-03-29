@@ -15,3 +15,16 @@ export default function useStickyState(defaultValue, key) {
   }, [key, value])
   return [value, setValue]
 }
+
+export function useReadOnlyStickyState(key) {
+  const [value, setValue] = React.useState(() => {
+    return null
+  })
+
+  React.useEffect(() => {
+    const stickyValue = window.localStorage.getItem(key)
+    setValue(stickyValue !== null ? JSON.parse(stickyValue) : null)
+  }, [])
+
+  return value
+}

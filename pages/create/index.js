@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 import baseStyles from '../../styles/Home.module.css'
 import styles from '../../styles/Create.module.css'
@@ -6,8 +5,9 @@ import SkippableInput from '../../components/skippableInput'
 import SkippableTextarea from '../../components/skippableTextarea'
 import SkippableSelect from '../../components/skippableSelect'
 import useStickyState from '../../helpers/useStickyState.hook'
+import { useRouter } from 'next/router'
 
-export default function Create(props) {
+export default function Create() {
   const sections = [
     'name',
     'pronouns',
@@ -55,8 +55,10 @@ export default function Create(props) {
     ].join(' ')
   }
 
+  const router = useRouter()
   function submit() {
     console.log(formState)
+    router.push('/view')
   }
 
   function updateValue(key, value) {
