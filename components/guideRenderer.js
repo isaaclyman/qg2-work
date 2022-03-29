@@ -24,19 +24,19 @@ export default function GuideRenderer(props) {
 /*
 PALETTE
 
-light green
-$olivine: rgba(140, 179, 105, 1);
+light green, c black
+$olivine: rgba(151, 187, 119, 1);
 
-yellow
+yellow, c black
 $flax: rgba(244, 226, 133, 1);
 
-orange
+orange, c black
 $sandy-brown: rgba(244, 162, 89, 1);
 
-dark green
+dark green, c white
 $wintergreen-dream: rgba(91, 142, 125, 1);
 
-red
+red, c white
 $bittersweet-shimmer: rgba(188, 75, 81, 1);
 */
 
@@ -47,7 +47,7 @@ function createDocument(responses) {
     } - ${new Date().toLocaleDateString()}`
   }
 
-  const worksans = style => `/fonts/WorkSans-${style}.ttf`
+  const worksans = (style) => `/fonts/WorkSans-${style}.ttf`
   Font.register({
     family: 'Work Sans',
     fonts: [
@@ -58,97 +58,189 @@ function createDocument(responses) {
 
   const pdfStyles = StyleSheet.create({
     page: {
-      backgroundColor: 'rgba(244, 226, 133, 1)',
-      color: '#222',
-      flexDirection: 'column',
+      backgroundColor: '#fff',
+      flexDirection: 'row',
       fontFamily: 'Work Sans',
       fontWeight: 'normal',
+      height: '100%',
     },
-    headerBar: {
+    leftSection: {
+      backgroundColor: 'rgba(218, 231, 227, 1)',
+      color: '#222',
+      flex: 2,
+      flexDirection: 'column',
+      height: '100%',
+      padding: 20,
+    },
+    rightSection: {
+      backgroundColor: 'rgba(91, 142, 125, 1)',
+      color: '#eee',
+      flex: 5,
+      flexDirection: 'column',
+      height: '100%',
+      padding: 20,
+    },
+    logoIntro: {
+      color: 'rgba(91, 142, 125, 0.8)',
+      fontSize: 11,
+      fontWeight: 'bold',
+      paddingLeft: 1,
+      textDecoration: 'none',
+    },
+    logoText: {
+      color: '#222',
+      fontSize: 11,
+      fontWeight: 'bold',
+      paddingLeft: 4,
+      paddingVertical: 45,
+      textDecoration: 'none',
+    },
+    logoLink: {
+      textDecoration: 'none',
+    },
+    logoContainer: {
       alignItems: 'center',
-      backgroundColor: '#000',
-      color: '#ddd',
       flexDirection: 'row',
-      justifyContent: 'center',
-      paddingVertical: 4,
+      justifyContent: 'flex-start',
     },
-    headerBarText: {
-      color: '#aaa',
-      fontSize: 8,
+    logo: {
+      paddingVertical: 38,
+      width: '50%',
     },
-    headerLink: {
-      color: '#aaa',
+    leftSubsection: {
+      flexDirection: 'column',
+      marginBottom: 16,
     },
-    nameSection: {
-      alignItems: 'center',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginTop: 32,
-      width: '100%',
+    leftHeader: {
+      color: 'rgba(91, 142, 125, 0.8)',
+      fontSize: 13,
+      fontWeight: 'bold',
+      paddingLeft: 1,
     },
-    nameIntro: {
-      fontSize: 20,
+    leftContent: {
+      fontSize: 24,
     },
-    name: {
-      fontSize: 30,
-      fontWeight: 'bold'
+    rightSubsection: {
+      flexDirection: 'column',
+      marginBottom: 16,
     },
-    pronouns: {
-      color: '#444',
+    rightHeader: {
+      color: 'rgba(218, 231, 227, 1)',
+      fontSize: 13,
+      fontWeight: 'bold',
+      marginBottom: 4,
+    },
+    rightContent: {
+      color: 'rgba(218, 231, 227, 1)',
       fontSize: 16,
-      marginLeft: 8
-    }
+      lineHeight: 1.5,
+    },
+    rightAnnouncement: {
+      marginTop: 16,
+    },
+    rightAnnouncementText: {
+      color: 'rgba(218, 231, 227, 1)',
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 16,
+    },
   })
 
   return (
     <Document creator="qg2.work" producer="qg2.work" title={getTitle()}>
       <Page size="A4" style={pdfStyles.page}>
-        <View style={pdfStyles.headerBar} fixed={true}>
-          <Text style={pdfStyles.headerBarText}>
-            made with&nbsp;
-            <Link style={pdfStyles.headerLink} src="https://qg2.work/">
-              qg2.work
-            </Link>
-          </Text>
+        <View style={pdfStyles.leftSection} fixed={true}>
+          <Link src="https://qg2.work/" style={pdfStyles.logoLink}>
+            <View style={pdfStyles.logoContainer}>
+              <Text style={pdfStyles.logoIntro}>a guide by</Text>
+              <Text style={pdfStyles.logoText}>qg2.work</Text>
+            </View>
+          </Link>
+
+          {responses.name && (
+            <View style={pdfStyles.leftSubsection}>
+              <Text style={pdfStyles.leftHeader}>Preferred name</Text>
+              <Text style={pdfStyles.leftContent}>{responses.name}</Text>
+            </View>
+          )}
+
+          {responses.pronouns && (
+            <View style={pdfStyles.leftSubsection}>
+              <Text style={pdfStyles.leftHeader}>Pronouns</Text>
+              <Text style={pdfStyles.leftContent}>{responses.pronouns}</Text>
+            </View>
+          )}
+
+          {responses.title && (
+            <View style={pdfStyles.leftSubsection}>
+              <Text style={pdfStyles.leftHeader}>Job title</Text>
+              <Text
+                style={[
+                  pdfStyles.leftContent,
+                  responses.title.length <= 10
+                    ? { fontSize: 24 }
+                    : { fontSize: 16 },
+                ]}
+              >
+                {responses.title}
+              </Text>
+            </View>
+          )}
         </View>
-        {responses.name && (
-          <View style={pdfStyles.nameSection}>
-            <Text style={pdfStyles.nameIntro}>My name is </Text>
-            <Text style={pdfStyles.name}>{responses.name}</Text>
-            {responses.pronouns && (
-              <Text style={pdfStyles.pronouns}>({responses.pronouns})</Text>
-            )}
+        <View style={pdfStyles.rightSection}>
+          <View style={pdfStyles.rightAnnouncement}>
+            <Text style={pdfStyles.rightAnnouncementText}>
+              I look forward to working with you. Here are some things that may
+              be helpful to know.
+            </Text>
           </View>
-        )}
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Pronouns</Text>
-          <Text>{responses.pronouns}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Title</Text>
-          <Text>{responses.title}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Areas of expertise</Text>
-          <Text>{responses.expertise}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Workplace accommodations</Text>
-          <Text>{responses.accommodations}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>
-            Preferred communication style
-          </Text>
-          <Text>{responses.communication}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Preferred feedback style</Text>
-          <Text>{responses.feedback}</Text>
-        </View>
-        <View style={pdfStyles.section}>
-          <Text style={pdfStyles.sectionTitle}>Collaboration tips</Text>
-          <Text>{responses.tips}</Text>
+
+          {responses.expertise && (
+            <View style={pdfStyles.rightSubsection}>
+              <Text style={pdfStyles.rightHeader}>
+                I can be the expert in the room on...
+              </Text>
+              <Text style={pdfStyles.rightContent}>{responses.expertise}</Text>
+            </View>
+          )}
+
+          {responses.communication && (
+            <View style={pdfStyles.rightSubsection}>
+              <Text style={pdfStyles.rightHeader}>
+                My preferred communication style
+              </Text>
+              <Text style={pdfStyles.rightContent}>
+                {responses.communication}
+              </Text>
+            </View>
+          )}
+
+          {responses.feedback && (
+            <View style={pdfStyles.rightSubsection}>
+              <Text style={pdfStyles.rightHeader}>
+                The best way to give feedback on my work
+              </Text>
+              <Text style={pdfStyles.rightContent}>{responses.feedback}</Text>
+            </View>
+          )}
+
+          {responses.accommodations && (
+            <View style={pdfStyles.rightSubsection}>
+              <Text style={pdfStyles.rightHeader}>Just so you know...</Text>
+              <Text style={pdfStyles.rightContent}>
+                {responses.accommodations}
+              </Text>
+            </View>
+          )}
+
+          {responses.tips && (
+            <View style={pdfStyles.rightSubsection}>
+              <Text style={pdfStyles.rightHeader}>For best results, you should know</Text>
+              <Text style={pdfStyles.rightContent}>
+                {responses.tips}
+              </Text>
+            </View>
+          )}
         </View>
       </Page>
     </Document>

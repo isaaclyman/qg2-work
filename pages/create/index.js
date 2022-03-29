@@ -99,7 +99,7 @@ export default function Create() {
           <p>Great! What are your pronouns, if you're comfortable sharing?</p>
 
           <SkippableInput
-            placeholder="They/them"
+            placeholder="they/them"
             value={formState.pronouns}
             onChange={(value) => updateValue('pronouns', value)}
           ></SkippableInput>
@@ -142,7 +142,7 @@ export default function Create() {
 
           <SkippableTextarea
             placeholder={
-              'I have ADHD, so I function best when everything is written down and ' +
+              'I have ADHD, so I work best when everything is written down and ' +
               'deadlines are clearly communicated in advance.'
             }
             value={formState.accommodations}
@@ -160,7 +160,7 @@ export default function Create() {
             options={[
               'Asynchronous: Slack or email',
               'Synchronous: Zoom or phone call',
-              'No preference',
+              'No preference: Whatever works best for you',
             ]}
           ></SkippableSelect>
         </div>
