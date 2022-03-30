@@ -239,7 +239,7 @@ export function createDocument(responses) {
           {responses.tips && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>
-                For best results, you should know
+                For best results, keep in mind
               </Text>
               <Text style={pdfStyles.rightContent}>{responses.tips}</Text>
             </View>
