@@ -4,7 +4,7 @@ import styles from '../../styles/View.module.css'
 import { useReadOnlyStickyState } from '../../helpers/useStickyState.hook'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import GuideRenderer from '../../components/guideRenderer'
+import GuideRenderer, { createDocument } from '../../components/guideRenderer'
 
 const humanFriendlySectionNames = {
   name: 'Name',
@@ -71,20 +71,25 @@ export default function View() {
         )}
 
         {isLoaded && createForm && !getMissingSections() && (
-          <p>
-            Great! We've got everything we need to generate your guide.
-          </p>
+          <p>Great! We've got everything we need to generate your guide.</p>
         )}
 
         {isLoaded && createForm && (
-          <div>
+          <div className={styles.actions}>
             <Link href="/create">
-              <button>Edit your responses</button>
+              <button className={styles.actionButton}>
+                Edit your responses
+              </button>
             </Link>
           </div>
         )}
       </main>
-      {isLoaded && createForm && <GuideRenderer responses={createForm} />}
+      {isLoaded && createForm && (
+        <>
+          <p style={{margin: '4px 0'}}>View and save your PDF:</p>
+          <GuideRenderer>{createDocument(createForm)}</GuideRenderer>
+        </>
+      )}
     </div>
   )
 }

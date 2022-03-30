@@ -10,12 +10,11 @@ import {
 } from '@react-pdf/renderer'
 import styles from '../styles/GuideRenderer.module.css'
 
-// props: responses { object }
 export default function GuideRenderer(props) {
   return (
     <div className={styles.container}>
       <PDFViewer className={styles.viewer}>
-        {createDocument(props.responses)}
+        {props.children}
       </PDFViewer>
     </div>
   )
@@ -40,13 +39,13 @@ red, c white
 $bittersweet-shimmer: rgba(188, 75, 81, 1);
 */
 
-function createDocument(responses) {
-  function getTitle() {
-    return `How to work with ${
-      responses.name
-    } - ${new Date().toLocaleDateString()}`
-  }
+export function getTitle(responses) {
+  return `How to work with ${
+    responses.name
+  } - ${new Date().toLocaleDateString()}`
+}
 
+export function createDocument(responses) {
   const worksans = (style) => `/fonts/WorkSans-${style}.ttf`
   Font.register({
     family: 'Work Sans',
@@ -147,7 +146,11 @@ function createDocument(responses) {
   })
 
   return (
-    <Document creator="qg2.work" producer="qg2.work" title={getTitle()}>
+    <Document
+      creator="qg2.work"
+      producer="qg2.work"
+      title={getTitle(responses)}
+    >
       <Page size="A4" style={pdfStyles.page}>
         <View style={pdfStyles.leftSection} fixed={true}>
           <Link src="https://qg2.work/" style={pdfStyles.logoLink}>
@@ -235,10 +238,10 @@ function createDocument(responses) {
 
           {responses.tips && (
             <View style={pdfStyles.rightSubsection}>
-              <Text style={pdfStyles.rightHeader}>For best results, you should know</Text>
-              <Text style={pdfStyles.rightContent}>
-                {responses.tips}
+              <Text style={pdfStyles.rightHeader}>
+                For best results, you should know
               </Text>
+              <Text style={pdfStyles.rightContent}>{responses.tips}</Text>
             </View>
           )}
         </View>

@@ -167,7 +167,9 @@ export default function Create() {
 
         {/* FEEDBACK */}
         <div className={getClasses('feedback')}>
-          <p>How do you prefer to receive feedback on your work?</p>
+          <p>
+            How do you prefer to receive constructive feedback on your work?
+          </p>
 
           <SkippableSelect
             value={formState.feedback}
@@ -175,7 +177,7 @@ export default function Create() {
             options={[
               'Face-to-face in a casual conversation',
               'A short message outside of work hours',
-              'Direct, but couched in praise',
+              `Direct, but delivered in a positive way`,
               'Please submit all feedback through my manager',
               'No preference',
             ]}
