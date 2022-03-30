@@ -159,7 +159,7 @@ export function createDocument(responses) {
     >
       <Page size="A4" style={pdfStyles.page}>
         <View style={pdfStyles.leftSection} fixed={true}>
-          <Link src="https://qg2.work/" style={pdfStyles.logoLink}>
+          <Link src="http://qg2.work/" style={pdfStyles.logoLink}>
             <View style={pdfStyles.logoContainer}>
               <Text style={pdfStyles.logoIntro}>a guide by</Text>
               <Text style={pdfStyles.logoText}>qg2.work</Text>
