@@ -13,9 +13,7 @@ import styles from '../styles/GuideRenderer.module.css'
 export default function GuideRenderer(props) {
   return (
     <div className={styles.container}>
-      <PDFViewer className={styles.viewer}>
-        {props.children}
-      </PDFViewer>
+      <PDFViewer className={styles.viewer}>{props.children}</PDFViewer>
     </div>
   )
 }
@@ -41,7 +39,7 @@ $bittersweet-shimmer: rgba(188, 75, 81, 1);
 
 export function getTitle(responses) {
   return `How to work with ${
-    responses.name
+    responses.name || 'me'
   } - ${new Date().toLocaleDateString()}`
 }
 
@@ -56,7 +54,11 @@ export function createDocument(responses) {
   })
 
   function isNonEmpty(key) {
-    return typeof responses[key] === 'string' && responses[key].trim() && responses[key] !== 'N/A'
+    return !!(
+      typeof responses[key] === 'string' &&
+      responses[key].trim() &&
+      responses[key] !== 'N/A'
+    )
   }
 
   const pdfStyles = StyleSheet.create({
