@@ -55,6 +55,10 @@ export function createDocument(responses) {
     ],
   })
 
+  function isNonEmpty(key) {
+    return typeof responses[key] === 'string' && responses[key].trim() && responses[key] !== 'N/A'
+  }
+
   const pdfStyles = StyleSheet.create({
     page: {
       backgroundColor: '#fff',
@@ -160,21 +164,21 @@ export function createDocument(responses) {
             </View>
           </Link>
 
-          {responses.name && (
+          {isNonEmpty('name') && (
             <View style={pdfStyles.leftSubsection}>
               <Text style={pdfStyles.leftHeader}>Preferred name</Text>
               <Text style={pdfStyles.leftContent}>{responses.name}</Text>
             </View>
           )}
 
-          {responses.pronouns && (
+          {isNonEmpty('pronouns') && (
             <View style={pdfStyles.leftSubsection}>
               <Text style={pdfStyles.leftHeader}>Pronouns</Text>
               <Text style={pdfStyles.leftContent}>{responses.pronouns}</Text>
             </View>
           )}
 
-          {responses.title && (
+          {isNonEmpty('title') && (
             <View style={pdfStyles.leftSubsection}>
               <Text style={pdfStyles.leftHeader}>Job title</Text>
               <Text
@@ -198,7 +202,7 @@ export function createDocument(responses) {
             </Text>
           </View>
 
-          {responses.expertise && (
+          {isNonEmpty('expertise') && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>
                 I can be the expert in the room on...
@@ -207,7 +211,7 @@ export function createDocument(responses) {
             </View>
           )}
 
-          {responses.communication && (
+          {isNonEmpty('communication') && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>
                 My preferred communication style
@@ -218,7 +222,7 @@ export function createDocument(responses) {
             </View>
           )}
 
-          {responses.feedback && (
+          {isNonEmpty('feedback') && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>
                 The best way to give feedback on my work
@@ -227,7 +231,7 @@ export function createDocument(responses) {
             </View>
           )}
 
-          {responses.accommodations && (
+          {isNonEmpty('accommodations') && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>Just so you know...</Text>
               <Text style={pdfStyles.rightContent}>
@@ -236,7 +240,7 @@ export function createDocument(responses) {
             </View>
           )}
 
-          {responses.tips && (
+          {isNonEmpty('tips') && (
             <View style={pdfStyles.rightSubsection}>
               <Text style={pdfStyles.rightHeader}>
                 For best results, keep in mind
